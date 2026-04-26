@@ -1,0 +1,124 @@
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #000;
+  color: white;
+  text-align: center;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  position: fixed;
+  width: 100%;
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(10px);
+}
+
+.navbar a {
+  color: #aaa;
+  margin: 0 10px;
+}
+
+/* Hero */
+.hero {
+  padding-top: 120px;
+}
+
+.hero h1 {
+  color: gold;
+  font-size: 48px;
+  text-shadow: 0 0 30px gold;
+}
+
+.bobo-img {
+  width: 180px;
+  border-radius: 50%;
+  box-shadow: 0 0 40px gold;
+  animation: float 3s infinite;
+}
+
+@keyframes float {
+  50% { transform: translateY(-12px); }
+}
+
+/* Buttons */
+.btn {
+  padding: 15px 30px;
+  margin: 10px;
+  border-radius: 30px;
+  text-decoration: none;
+}
+
+.gold {
+  background: gold;
+  color: black;
+}
+
+.outline {
+  border: 1px solid gold;
+  color: gold;
+}
+
+/* Section */
+.section {
+  padding: 80px 20px;
+}
+
+/* Cards */
+.grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: #111;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 15px;
+  width: 200px;
+  border: 1px solid #222;
+}
+
+.card:hover {
+  border-color: gold;
+}
+
+/* Contract */
+.contract-box {
+  background: #111;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+/* Timeline */
+.timeline div {
+  margin: 20px;
+  padding: 10px;
+  border-left: 2px solid gold;
+}
+
+/* Footer */
+.footer {
+  padding: 30px;
+  color: #666;
+}
+#toast-msg {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #000;         /* خلفية سوداء */
+  color: #ffcc00;                 /* نص أصفر ذهبي */
+  padding: 15px 30px;
+  border: 2px solid #ffcc00;      /* إطار أصفر */
+  border-radius: 10px;
+  font-weight: bold;
+  display: none;                  /* مخفي بشكل افتراضي */
+  z-index: 10000;
+  box-shadow: 0 0 15px rgba(255, 204, 0, 0.5);
+}
+button
