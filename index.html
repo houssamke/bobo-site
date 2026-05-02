@@ -7,209 +7,139 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         body { margin: 0; font-family: 'Segoe UI', Arial, sans-serif; background-color: #000; color: white; text-align: center; overflow-x: hidden; position: relative; }
-        
         #particles-js { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
-
-        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 15px 6%; border-bottom: 1px solid #1a1a1a; background: rgba(0, 0, 0, 0.9); position: sticky; top: 0; z-index: 1000; }
-        .logo-img { height: 55px; width: 55px; border-radius: 50%; object-fit: cover; border: 2px solid #d4af37; }
         
-        /* --- الزر المتحرك --- */
-        .btn-buy { 
-            background: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728); 
-            color: black; 
-            padding: 12px 28px; 
-            border-radius: 50px; 
-            text-decoration: none; 
-            font-weight: bold; 
-            text-transform: uppercase; 
-            font-size: 14px; 
-            position: relative;
-            overflow: hidden;
-            display: inline-block;
-            animation: pulse-animation 2s infinite;
-        }
+        /* Navbar & Logo */
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 15px 6%; border-bottom: 1px solid #1a1a1a; background: rgba(0, 0, 0, 0.9); position: sticky; top: 0; z-index: 1000; }
+        .logo-img { height: 55px; width: 55px; border-radius: 50%; object-fit: cover; border: 2px solid #d4af37; animation: rotateLogo 10s linear infinite; }
+        @keyframes rotateLogo { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        @keyframes pulse-animation {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
-            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
-        }
+        /* Buy Button Pulse */
+        .btn-buy { background: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728); color: black; padding: 12px 28px; border-radius: 50px; text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 14px; display: inline-block; animation: pulse-animation 2s infinite; }
+        @keyframes pulse-animation { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); } 70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); } }
 
-        .btn-buy::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -60%;
-            width: 30%;
-            height: 200%;
-            background: rgba(255, 255, 255, 0.5);
-            transform: rotate(25deg);
-            animation: shine-effect 3s infinite;
-        }
-
-        @keyframes shine-effect {
-            0% { left: -60%; }
-            15% { left: 120%; }
-            100% { left: 120%; }
-        }
-
+        /* Hero */
         .hero { padding: 60px 20px; }
-        .bobo-img { width: 200px; margin-bottom: 20px; animation: float 3s infinite ease-in-out; }
+        .bobo-img { width: 200px; margin-bottom: 20px; border-radius: 50%; animation: rotateLogo 15s linear infinite, float 3s infinite ease-in-out; }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
         .gold-text { background: linear-gradient(to right, #bf953f, #fcf6ba, #aa771c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 44px; font-weight: 900; margin-bottom: 10px; }
-        
-        .bobo-summary {
-            max-width: 700px;
-            margin: 0 auto 20px auto;
-            color: #ccc;
-            font-size: 16px;
-            line-height: 1.6;
-            font-weight: 300;
-            letter-spacing: 0.5px;
-        }
+        .bobo-summary { max-width: 700px; margin: 0 auto 20px auto; color: #ccc; font-size: 16px; line-height: 1.6; }
 
-        .social-links { margin-top: 25px; }
-        .btn-social { display: inline-flex; align-items: center; gap: 10px; padding: 12px 20px; margin: 5px; border-radius: 10px; text-decoration: none; color: white; font-weight: bold; font-size: 14px; }
-        .btn-x { background: #222; }
-        .btn-tg { background: #0088cc; }
+        /* Social Links */
+        .social-links { margin-top: 25px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .btn-social { display: inline-flex; align-items: center; gap: 10px; padding: 12px 25px; border-radius: 10px; text-decoration: none; color: white; font-weight: bold; font-size: 14px; border: 1px solid rgba(212, 175, 55, 0.5); animation: button-glow-pulse 2.5s infinite ease-in-out; }
+        @keyframes button-glow-pulse { 0%, 100% { box-shadow: 0 0 5px rgba(212, 175, 55, 0.2); } 50% { box-shadow: 0 0 15px rgba(212, 175, 55, 0.5); border-color: gold; transform: scale(1.03); } }
+        .btn-x { background: #222; } .btn-tg { background: #0088cc; } .btn-wp { background: #d4af37; color: black; }
 
+        /* Contract Box & Wobble Animation for Copy Button */
         .contract-section { padding: 40px 20px; }
-        .contract-box { background: rgba(10, 10, 10, 0.8); padding: 12px; border-radius: 10px; border: 1px dashed #d4af37; display: inline-block; word-break: break-all; color: #d4af37; margin-bottom: 15px; font-family: monospace; }
-        .copy-btn { background: #ffcc00; color: #000; border: none; padding: 12px 30px; border-radius: 8px; font-weight: bold; cursor: pointer; margin: 0 auto; display: block; }
-
-        /* --- Roadmap --- */
-        .roadmap-section { padding: 60px 20px; max-width: 800px; margin: 0 auto; }
-        .section-title { color: gold; font-size: 2.5rem; margin-bottom: 40px; text-transform: uppercase; letter-spacing: 2px; }
+        .contract-box { background: rgba(10, 10, 10, 0.8); padding: 12px; border-radius: 10px; border: 1px dashed #d4af37; display: inline-block; word-break: break-all; color: #d4af37; font-family: monospace; margin-bottom: 15px; }
         
-        .phase-card { 
-            background: rgba(20, 20, 20, 0.8); 
-            border-left: 4px solid #d4af37; 
-            padding: 25px; 
-            margin-bottom: 30px; 
-            border-radius: 0 15px 15px 0;
-            text-align: left;
-            transition: 0.3s;
+        .copy-btn { background: #ffcc00; color: #000; border: none; padding: 12px 30px; border-radius: 8px; font-weight: bold; cursor: pointer; display: block; margin: 0 auto; animation: gentle-wobble 2s infinite ease-in-out; }
+        @keyframes gentle-wobble {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(2deg) scale(1.05); }
+            50% { transform: rotate(-2deg) scale(1.05); }
+            75% { transform: rotate(1deg) scale(1.05); }
         }
-        .phase-card h3 { color: #fcf6ba; margin-top: 0; }
-        .phase-card ul { list-style: none; padding: 0; }
-        .phase-card ul li { margin-bottom: 10px; color: #ccc; display: flex; align-items: center; }
-        .phase-card ul li::before { content: "✔"; color: #d4af37; margin-right: 10px; font-weight: bold; }
 
-        /* --- Tokenomics --- */
-        .tokenomics-container { 
-            display: flex; 
-            justify-content: center; 
-            flex-wrap: wrap; 
-            gap: 20px; 
-            max-width: 1000px; 
-            margin: 40px auto; 
-            padding: 0 20px; 
-        }
-        .token-card { 
-            background: rgba(15, 15, 15, 0.9); 
-            border: 1px solid #d4af37; 
-            padding: 30px; 
-            border-radius: 20px; 
-            width: 260px; 
-            transition: 0.4s;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-        }
-        .token-card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2); }
-        .token-card h3 { color: #888; font-size: 14px; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px; }
-        .token-card p { font-size: 24px; font-weight: bold; color: #fff; margin: 0; }
+        /* Roadmap Styling */
+        .roadmap-section { padding: 60px 20px; max-width: 800px; margin: 0 auto; }
+        .section-title { color: gold; font-size: 2.5rem; margin-bottom: 40px; text-transform: uppercase; }
+        .phase-card { background: rgba(20, 20, 20, 0.8); border-left: 4px solid #d4af37; padding: 25px; margin-bottom: 30px; border-radius: 0 15px 15px 0; text-align: left; }
+        .phase-card h3 { color: gold; margin-top: 0; }
+        .phase-card ul { list-style: none; padding: 0; }
+        .phase-card ul li::before { content: "✔ "; color: #d4af37; font-weight: bold; }
+
+        /* Tokenomics Styling */
+        .tokenomics-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; max-width: 1100px; margin: 40px auto; padding: 0 20px; }
+        .token-card { background: rgba(15, 15, 15, 0.9); border: 1px solid #d4af37; padding: 30px; border-radius: 20px; width: 220px; }
         .token-icon { color: #f3ba2f; font-size: 35px; margin-bottom: 15px; }
 
-        /* --- Partners --- */
-        .partners-section { padding: 60px 0; background: rgba(5, 5, 5, 0.5); overflow: hidden; }
-        .partners-wrapper { display: flex; width: 200%; animation: scroll-partners 20s linear infinite; }
-        .partner-item { width: 25%; display: flex; align-items: center; justify-content: center; gap: 15px; font-size: 22px; font-weight: 900; color: #d4af37; filter: grayscale(1); transition: 0.5s; opacity: 0.6; }
-        .partner-item:hover { filter: grayscale(0); opacity: 1; }
-        .partner-item i { font-size: 30px; }
+        /* Allocation Hub */
+        .allocation-showcase { padding: 80px 0; background: rgba(5, 5, 5, 0.5); }
+        .main-allocation-card { max-width: 350px; margin: 0 auto 40px auto; background: rgba(212, 175, 55, 0.1); border: 2px solid #d4af37; padding: 30px; border-radius: 20px; box-shadow: 0 0 25px rgba(212, 175, 55, 0.3); }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px; max-width: 1000px; margin: 0 auto 40px auto; padding: 0 20px; }
+        .stat-item { background: rgba(20, 20, 20, 0.8); border: 1px solid rgba(212, 175, 55, 0.3); padding: 15px; border-radius: 12px; display: flex; align-items: center; gap: 12px; transition: 0.3s; text-align: left; }
+        .stat-item:hover { border-color: #d4af37; transform: translateY(-5px); }
+        .stat-icon { color: #d4af37; font-size: 20px; }
+        .stat-label { display: block; font-size: 10px; color: #aaa; text-transform: uppercase; }
+        .stat-value { display: block; font-size: 18px; font-weight: bold; color: #fff; }
+        .bobo-frame { max-width: 850px; margin: 0 auto; padding: 15px; background: rgba(10, 10, 10, 0.8); border: 2px solid #d4af37; border-radius: 20px; }
+        .allocation-img { width: 100%; border-radius: 10px; }
 
-        @keyframes scroll-partners {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
+        /* Partners */
+        .partners-wrapper { display: flex; width: 200%; animation: scroll-partners 20s linear infinite; padding: 20px 0; }
+        .partner-item { width: 25%; font-size: 22px; font-weight: 900; color: rgba(212, 175, 55, 0.6); }
+        @keyframes scroll-partners { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        /* --- FAQ Section --- */
+        /* FAQ Styling */
         .faq-section { padding: 60px 20px; max-width: 800px; margin: 0 auto; text-align: left; }
-        .faq-item { background: rgba(15, 15, 15, 0.9); border: 1px solid #1a1a1a; border-radius: 10px; margin-bottom: 15px; overflow: hidden; }
-        .faq-question { padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; color: #fcf6ba; transition: 0.3s; }
-        .faq-question:hover { background: rgba(212, 175, 55, 0.1); }
-        .faq-answer { padding: 0 20px; max-height: 0; overflow: hidden; transition: 0.4s ease-out; color: #ccc; line-height: 1.6; }
+        .faq-item { background: rgba(15, 15, 15, 0.9); border: 1px solid #1a1a1a; border-radius: 10px; margin-bottom: 10px; overflow: hidden; }
+        .faq-question { padding: 20px; cursor: pointer; display: flex; justify-content: space-between; font-weight: bold; color: #fcf6ba; }
+        .faq-answer { padding: 0 20px; max-height: 0; overflow: hidden; transition: 0.4s; color: #ccc; }
         .faq-item.active .faq-answer { padding: 15px 20px; max-height: 200px; border-top: 1px solid #1a1a1a; }
-        .faq-icon { transition: 0.3s; color: #d4af37; }
-        .faq-item.active .faq-icon { transform: rotate(180deg); }
 
-        /* Reveal */
         .reveal { opacity: 0; transform: translateY(30px); transition: 1s ease; }
         .reveal.visible { opacity: 1; transform: translateY(0); }
-
-        #custom-toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #000; color: #ffcc00; padding: 20px 40px; border: 2px solid #ffcc00; border-radius: 15px; font-weight: bold; z-index: 10000; display: none; }
+        #custom-toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #000; color: #ffcc00; padding: 20px 40px; border: 2px solid #ffcc00; border-radius: 15px; display: none; z-index: 10000; }
     </style>
 </head>
 <body>
-
     <div id="particles-js"></div>
-
-    <nav class="navbar">
-        <img src="logo.png" alt="Logo" class="logo-img">
-        <a href="https://pancakeswap.finance/swap?outputCurrency=0x55ad16Bd573B3365f43A9dAeB0Cc66A73821b4a5" class="btn-buy">Buy $BOBO</a>
-    </nav>
+    <nav class="navbar"><img src="Logo.png" alt="Logo" class="logo-img"><a href="https://pancakeswap.finance/swap?outputCurrency=0x55ad16Bd573B3365f43A9dAeB0Cc66A73821b4a5" class="btn-buy">Buy $BOBO</a></nav>
 
     <header class="hero reveal">
         <img src="bobo.png" alt="BOBO" class="bobo-img">
         <h1 class="gold-text">BOBO TOKEN</h1>
-        <p class="bobo-summary reveal">
-            BOBO Token is an innovative digital project in the cryptocurrency world, aimed at building a strong and sustainable community that merges modern technology with the spirit of meme culture in a professional and intelligent way.
-        </p>
+        <p class="bobo-summary">Innovative digital project merging technology with meme culture.</p>
         <div class="social-links">
             <a href="https://x.com/bobobschain" target="_blank" class="btn-social btn-x"><i class="fa-brands fa-x-twitter"></i> Twitter</a>
-            <a href="https://t.me/+Ly1voO-aBVMzNTA0" target="_blank" class="btn-social btn-tg"><i class="fa-brands fa-telegram"></i> Telegram</a>
+            <a href="https://t.me/BOBO_BSCHAIN" target="_blank" class="btn-social btn-tg"><i class="fa-brands fa-telegram"></i> Telegram</a>
+            <a href="BOBO.pdf" target="_blank" class="btn-social btn-wp"><i class="fa-solid fa-file-pdf"></i> Whitepaper</a>
         </div>
     </header>
 
     <section class="contract-section reveal">
-        <h2 style="color: gold; font-size: 1.5rem;">CONTRACT ADDRESS</h2>
-        <div class="contract-box">
-            <code id="contractAddr">123456789123456789</code>
-        </div>
+        <h2 style="color: gold;">CONTRACT ADDRESS</h2>
+        <div class="contract-box"><code id="contractAddr">0x55ad16Bd573B3365f43A9dAeB0Cc66A73821b4a5</code></div>
         <button class="copy-btn" onclick="copyAction()">COPY CONTRACT</button>
     </section>
+    
 
     <section class="roadmap-section">
-        <h2 class="section-title reveal">BOBO Roadmap</h2>
+        <h2 class="section-title reveal">Roadmap</h2>
         <div class="phase-card reveal">
             <h3>🟡 Phase 1: Community</h3>
             <ul>
-                <li>Launch BOBO social channels</li>
+                <li>Launch social channels</li>
                 <li>Build BOBO Army 💛</li>
                 <li>Daily content & memes</li>
-                <li>Reach 100 → 1000 followers</li>
+                <li>Reach 1000 followers</li>
             </ul>
         </div>
         <div class="phase-card reveal">
             <h3>🚀 Phase 2: DEX Launch</h3>
             <ul>
-                <li>Deploy smart contract</li>
-                <li>Add liquidity on PancakeSwap</li>
+                <li>Smart contract deploy</li>
+                <li>PancakeSwap liquidity</li>
                 <li>$BOBO goes LIVE</li>
             </ul>
         </div>
         <div class="phase-card reveal">
-            <h3>🎁 Phase 3: Airdrop & Rewards</h3>
+            <h3>🎁 Phase 3: Airdrop</h3>
             <ul>
-                <li>Announce BOBO Airdrop</li>
+                <li>Announce Airdrop</li>
                 <li>Reward early supporters 💎</li>
-                <li>Distribute tokens to active members</li>
+                <li>Distribute tokens</li>
             </ul>
         </div>
         <div class="phase-card reveal">
-            <h3>📊 Phase 4: Growth & Listings</h3>
+            <h3>📊 Phase 4: Listings</h3>
             <ul>
                 <li>Marketing campaigns</li>
-                <li>Apply to CoinGecko & CMC</li>
-                <li>Prepare for major listings 🚀</li>
+                <li>Apply to CG & CMC</li>
+                <li>Major listings 🚀</li>
             </ul>
         </div>
     </section>
@@ -217,110 +147,67 @@
     <section style="padding: 60px 0;">
         <h2 class="section-title reveal">Tokenomics</h2>
         <div class="tokenomics-container">
-            <div class="token-card reveal">
-                <i class="fa-solid fa-coins token-icon"></i>
-                <h3>Total Supply</h3>
-                <p>1,000,000,000</p>
-            </div>
-            <div class="token-card reveal">
-                <i class="fa-solid fa-layer-group token-icon"></i>
-                <h3>Network</h3>
-                <p style="color: #f3ba2f;">BSC (BEP-20)</p>
-            </div>
-            <div class="token-card reveal">
-                <i class="fa-solid fa-percent token-icon"></i>
-                <h3>Buy / Sell Tax</h3>
-                <p>0% / 0%</p>
-            </div>
-            <div class="token-card reveal">
-                <i class="fa-solid fa-lock token-icon"></i>
-                <h3>Liquidity</h3>
-                <p>Locked 100%</p>
-            </div>
+            <div class="token-card reveal"><i class="fa-solid fa-coins token-icon"></i><h3>Total Supply</h3><p>1,000,000,000</p></div>
+            <div class="token-card reveal"><i class="fa-solid fa-layer-group token-icon"></i><h3>Network</h3><p style="color: #f3ba2f;">BSC (BEP-20)</p></div>
+            <div class="token-card reveal"><i class="fa-solid fa-percent token-icon"></i><h3>Tax</h3><p>0% / 0%</p></div>
+            <div class="token-card reveal"><i class="fa-solid fa-lock token-icon"></i><h3>Liquidity</h3><p>Locked 100%</p></div>
         </div>
     </section>
 
-    <section class="partners-section reveal">
-        <h2 class="section-title" style="font-size: 1.8rem; margin-bottom: 30px;">PARTNERS & ECOSYSTEM</h2>
+    <section class="allocation-showcase reveal">
+        <h2 class="section-title">Project Allocation</h2>
+        <div class="main-allocation-card reveal">
+            <i class="fa-solid fa-crown stat-icon" style="font-size: 35px; margin-bottom: 10px;"></i>
+            <span class="stat-label" style="color: #d4af37; font-weight: bold;">Main Project Share</span>
+            <span class="stat-value" style="font-size: 38px; color: #fff;">12%</span>
+            <p style="font-size: 13px; color: #aaa; margin-top: 15px;">Strategic Distribution Hub</p>
+        </div>
+        <div class="stats-grid reveal">
+            <div class="stat-item"><i class="fa-solid fa-users-gear stat-icon"></i><div class="stat-info"><span class="stat-label">Core Team</span><span class="stat-value">4%</span></div></div>
+            <div class="stat-item"><i class="fa-solid fa-bullhorn stat-icon"></i><div class="stat-info"><span class="stat-label">Marketing</span><span class="stat-value">3%</span></div></div>
+            <div class="stat-item"><i class="fa-solid fa-parachute-box stat-icon"></i><div class="stat-info"><span class="stat-label">Airdrop</span><span class="stat-value">2%</span></div></div>
+            <div class="stat-item"><i class="fa-solid fa-faucet stat-icon"></i><div class="stat-info"><span class="stat-label">Liquidity</span><span class="stat-value">2%</span></div></div>
+            <div class="stat-item"><i class="fa-solid fa-code stat-icon"></i><div class="stat-info"><span class="stat-label">Development</span><span class="stat-value">1%</span></div></div>
+        </div>
+        <div class="bobo-frame reveal"><img src="BOBO 2.png" alt="Allocation Chart" class="allocation-img"></div>
+    </section>
+
+    <section style="padding: 60px 0;">
+        <h2 class="section-title reveal">Official Partners</h2>
         <div class="partners-wrapper">
-            <div class="partner-item"><i class="fa-solid fa-coins"></i> PANCAKESWAP</div>
-            <div class="partner-item"><i class="fa-solid fa-chart-line"></i> DEXTOOLS</div>
-            <div class="partner-item"><i class="fa-solid fa-shield-halved"></i> BSC SCAN</div>
-            <div class="partner-item"><i class="fa-solid fa-rocket"></i> COINGECKO</div>
-            <div class="partner-item"><i class="fa-solid fa-coins"></i> PANCAKESWAP</div>
-            <div class="partner-item"><i class="fa-solid fa-chart-line"></i> DEXTOOLS</div>
-            <div class="partner-item"><i class="fa-solid fa-shield-halved"></i> BSC SCAN</div>
-            <div class="partner-item"><i class="fa-solid fa-rocket"></i> COINGECKO</div>
+            <div class="partner-item">PANCAKESWAP</div>
+            <div class="partner-item">DEXTOOLS</div>
+            <div class="partner-item">BSC SCAN</div>
+            <div class="partner-item">COINGECKO</div>
         </div>
     </section>
 
     <section class="faq-section reveal">
-        <h2 class="section-title" style="font-size: 2rem; text-align: center;">Frequently Asked Questions</h2>
-        
-        <div class="faq-item">
-            <div class="faq-question">What is BOBO Token? <i class="fa-solid fa-chevron-down faq-icon"></i></div>
-            <div class="faq-answer">BOBO is a community-driven meme token on the Binance Smart Chain (BSC) that combines fun meme culture with a professional ecosystem.</div>
-        </div>
-
-        <div class="faq-item">
-            <div class="faq-question">Is the liquidity locked? <i class="fa-solid fa-chevron-down faq-icon"></i></div>
-            <div class="faq-answer">Yes, 100% of the liquidity is locked to ensure the safety and trust of our community members.</div>
-        </div>
-
-        <div class="faq-item">
-            <div class="faq-question">What are the transaction taxes? <i class="fa-solid fa-chevron-down faq-icon"></i></div>
-            <div class="faq-answer">BOBO features a 0% buy tax and 0% sell tax, making it easy and fair for everyone to trade.</div>
-        </div>
-
-        <div class="faq-item">
-            <div class="faq-question">How can I join the BOBO Army? <i class="fa-solid fa-chevron-down faq-icon"></i></div>
-            <div class="faq-answer">You can join our official Telegram and Twitter channels to stay updated and participate in our community events!</div>
-        </div>
+        <h2 class="section-title" style="text-align: center;">FAQ</h2>
+        <div class="faq-item"><div class="faq-question">What is BOBO Token? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer">Community-driven meme token on BSC.</div></div>
+        <div class="faq-item"><div class="faq-question">Is liquidity locked? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer">Yes, 100% locked.</div></div>
+        <div class="faq-item"><div class="faq-question">What are the taxes? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer">0% buy and 0% sell tax.</div></div>
+        <div class="faq-item"><div class="faq-question">How to join? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-answer">Follow us on Telegram and Twitter!</div></div>
     </section>
 
     <div id="custom-toast">Contract Copied! ✅</div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // FAQ Toggle Logic
-        document.querySelectorAll('.faq-question').forEach(question => {
-            question.addEventListener('click', () => {
-                const item = question.parentElement;
-                item.classList.toggle('active');
-            });
-        });
-
+        document.querySelectorAll('.faq-question').forEach(q => q.addEventListener('click', () => q.parentElement.classList.toggle('active')));
         function copyAction() {
-            const textToCopy = document.getElementById("contractAddr").innerText;
-            navigator.clipboard.writeText(textToCopy);
-            var toast = document.getElementById("custom-toast");
-            toast.style.display = "block";
-            setTimeout(() => toast.style.display = "none", 2000);
+            navigator.clipboard.writeText(document.getElementById("contractAddr").innerText);
+            document.getElementById("custom-toast").style.display = "block";
+            setTimeout(() => document.getElementById("custom-toast").style.display = "none", 2000);
         }
-
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                if (elementTop < windowHeight - 100) { reveals[i].classList.add("visible"); }
+                if (reveals[i].getBoundingClientRect().top < window.innerHeight - 100) reveals[i].classList.add("visible");
             }
         }
-
-        window.addEventListener("scroll", reveal);
-        reveal();
-
-        particlesJS("particles-js", {
-            "particles": {
-                "number": { "value": 70 },
-                "color": { "value": "#d4af37" },
-                "opacity": { "value": 0.5 },
-                "size": { "value": 3 },
-                "line_linked": { "enable": true, "color": "#d4af37", "opacity": 0.2 },
-                "move": { "enable": true, "speed": 2 }
-            },
-            "interactivity": { "events": { "onhover": { "enable": true, "mode": "repulse" } } }
-        });
+        window.addEventListener("scroll", reveal); reveal();
+        particlesJS("particles-js", { "particles": { "number": { "value": 70 }, "color": { "value": "#d4af37" }, "opacity": { "value": 0.4 }, "size": { "value": 3 }, "line_linked": { "enable": true, "color": "#d4af37", "opacity": 0.15 }, "move": { "enable": true, "speed": 2 } } });
     </script>
 </body>
 </html>
